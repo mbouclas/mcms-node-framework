@@ -1,7 +1,7 @@
 {
   "name": "mcms-node-framework",
   "description": "mcms node framwork.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "keywords": [
     "mcms",
     "framework",
@@ -14,7 +14,7 @@
     "url": "http://www.net-tomorrow.com/"
   },
   "dependencies": {
-    "mcms-node-core": "^0.0.1",
+    "mcms-node-core": "*",
     "MD5": "^1.2.1",
     "express": "~4.8.8",
     "minimist": "^1.1.0",
