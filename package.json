@@ -1,0 +1,12 @@
+{
+  "name": "mcmsNode",
+  "description": "mcms node version.",
+  "dependencies": {
+    "MD5": "^1.2.1",
+    "express": "~4.8.8",
+    "minimist": "^1.1.0",
+    "async": "~0.9.0",
+    "rootpath": "^0.1.2",
+    "colors": "^1.0.3"
+  }
+}

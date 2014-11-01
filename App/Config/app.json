@@ -1,0 +1,13 @@
+{
+  "serverPort" : 8003,
+  "debug" : false,
+  "locale" : "en",
+  "url" : "http://mcms.example.com",
+  "sessionTTL" : 60,
+  "serviceProviders" : [
+    "mcms-node/lib/CoreServiceProvider",
+    "mcms-admin/AdminServiceProvider",
+    "mcms-eshop/EshopServiceProvider",
+    "./App/projectServiceProvider"
+  ]
+}

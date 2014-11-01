@@ -1,0 +1,14 @@
+{
+  "default" : "bcrypt",
+
+  "mcrypt" : {
+    "secret" : "myBigAssSecretKe",
+    "driver" : "mcrypt",
+    "cipher" : "rijndael-256"
+  },
+  "bcrypt" : {
+    "secret" : "YourSecretKey!!!",
+    "driver" : "bcrypt",
+    "salt" : 10
+  }
+}

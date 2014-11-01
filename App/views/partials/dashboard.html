@@ -1,0 +1,10 @@
+{% extends '../layout.html' %}
+{% block content %}
+<h1>({{products.length}}) Products</h1>
+
+        <ul>
+        {% for product in products %}
+            <li>#{{product.autoID}} {{ product.title }}</li>
+        {% endfor %}
+        </ul>
+{% endblock %}

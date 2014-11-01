@@ -1,0 +1,17 @@
+{
+  "default" : "swig",
+  "path" : "App/views",
+  "hbs" : {
+    "engine" : "hbs",
+    "driver" : "hbs"
+  },
+  "ejs" : {
+    "engine" : "ejs",
+    "driver" : "ejs"
+  },
+  "swig" : {
+    "engine" : "html",
+    "driver" : "swig",
+    "defaultLoadDriver" : "loadViewsFS"
+  }
+}
