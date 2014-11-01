@@ -5,7 +5,7 @@
   "url" : "http://mcms.example.com",
   "sessionTTL" : 60,
   "serviceProviders" : [
-    "mcms-node/lib/CoreServiceProvider",
+    "mcms-node-core/lib/CoreServiceProvider",
     "mcms-admin/AdminServiceProvider",
     "mcms-eshop/EshopServiceProvider",
     "./App/projectServiceProvider"

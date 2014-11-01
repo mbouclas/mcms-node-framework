@@ -10,7 +10,7 @@
 
 
 require('rootpath')();
-var Mcms = require('./autoloader');
+var Mcms = require('./autoLoader');
 //load server
 
 

@@ -6,9 +6,9 @@ var App = {
 };
 
 var argv = require('minimist')(process.argv.slice(2));
-var Command = require('mcms-node/lib/Framework/Command/loader')(App);
+var Command = require('mcms-node-core/lib/Framework/Command/loader')(App);
 require('./Bootstrap/start');
-var Mcms = require('mcms-node')(App);
+var Mcms = require('mcms-node-core')(App);
 
 
 if (typeof argv['_'][0] == 'undefined' || argv['_'][0] == null){ //show all commands

@@ -2,7 +2,7 @@ module.exports = (function(App) {
     var express = require('express');
     var miniApp = express();
     var async = require('async');
-    var Command = require('mcms-node/lib/Framework/Command/loader')(App);
+    var Command = require('mcms-node-core/lib/Framework/Command/loader')(App);
 
     function project(){
         miniApp.set('views', __dirname + '/views');
