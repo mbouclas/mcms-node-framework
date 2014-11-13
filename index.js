@@ -27,17 +27,17 @@ var Mcms = require('./autoLoader');
 */
 
 
-var server = Mcms.lift();
+var server = Mcms.lift(null,ready);
 var Socket = Mcms.Io.sockets;
 
 
-/*
-Mcms.redis.client.get('workersCompleted',function(err,res){
-  console.log(res);
-});
-*/
+function ready(App){//we are soooo ready
+  App.Log.info('ready');
+//can do whatever you feel, like including some redis subs or beanstalk
+  App.Io.on('connection', function (socket) {
+    //require Socket files
+  });
+}
 
 
-Mcms.Io.on('connection', function (socket) {
-  console.log('socket is up');
-});
+

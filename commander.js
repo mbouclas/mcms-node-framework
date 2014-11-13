@@ -1,9 +1,11 @@
 require('rootpath')();
 var colors = require('colors');
+
 var App = {
     pathName : __dirname,
     CLI : true
 };
+
 
 var argv = require('minimist')(process.argv.slice(2));
 var Command = require('mcms-node-core/lib/Framework/Command/loader')(App);

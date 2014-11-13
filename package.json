@@ -1,12 +1,15 @@
 {
   "name": "mcms-node-framework",
   "description": "mcms node framwork.",
-  "version": "0.0.3",
+  "version": "0.0.8",
   "keywords": [
     "mcms",
     "framework",
     "cms"
   ],
+  "bin": {
+    "mcms-node": "./bin/mcms"
+  },
   "license": "MIT",
   "author": {
     "name": "Michael Bouclas",
@@ -20,6 +23,8 @@
     "minimist": "^1.1.0",
     "async": "~0.9.0",
     "rootpath": "^0.1.2",
-    "colors": "^1.0.3"
+    "colors": "^1.0.3",
+    "moment": "~2.8.3",
+    "slug": "~0.8.0"
   }
 }
