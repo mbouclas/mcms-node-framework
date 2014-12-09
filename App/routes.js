@@ -3,24 +3,6 @@ module.exports = (function(App,Package,Route){
     var models = Package.models;
     var Auth = (Package.Auth) ? Package.Auth : App.serviceProviders.core.auth;
 
-    Package.App.use(function(req, res, next){//Define global variables that we need in EVERY template
-        //menus
-        var Menu = new Package.services.Menu();
-        //Add all this stuff to cache so they are not loaded every time
-        App.async.parallel({
-            Menu : function(callback){
-                Menu.get({},callback);
-            }
-        },function(err,results){
-            for (var a in results){
-                res.locals[a] = results[a];
-            }
-            next();
-        });
-
-
-    });
-
     var localAuthMiddleware = Auth.middleware.local({
         successRedirect: '/userCP',
         failureRedirect: '/userCP/login'
@@ -56,6 +38,10 @@ module.exports = (function(App,Package,Route){
         next();
     });
 
+    var page = Route.param('page', function (req, res, next, id) {
+        next();
+    });
+
     Route.get('/',{
         as : 'home',
         exec : 'homeCtrl.index'
@@ -65,6 +51,57 @@ module.exports = (function(App,Package,Route){
         as : 'product',
         exec : 'Product/productsCtrl.viewProduct'
     });
+
+    Route.get('/addToCart/:productID.html',{
+        as : 'addToCart',
+        exec : 'Shop/cartCtrl.addToCart'
+    });
+
+    Route.group({prefix:'/cart',filters:[]},[
+        function(){
+            return {
+                method : 'get',
+                route:'add/:productID.html',
+                as : 'addToCart',
+                exec : 'Shop/cartCtrl.addToCart'
+            };
+        },
+        function(){
+            return {
+                method : 'get',
+                route:'clear.html',
+                as : 'clearCart',
+                exec : 'Shop/cartCtrl.clearCart'
+            };
+        },
+        function(){
+            return {
+                method : 'get',
+                route:'removeFromCart/:productID.html',
+                as : 'removeFromCart',
+                exec : 'Shop/cartCtrl.removeFromCart'
+            };
+        },
+    ]);
+
+    Route.group({prefix:'/category',filters:[]},[
+        function(){
+            return {
+                method : 'get',
+                route:':permalink.html',
+                as : 'productCategory',
+                exec : 'Product/productsCtrl.index'
+            };
+        },
+        function(){
+            return {
+                method : 'get',
+                route:':permalink/:page.html',
+                as : 'productCategoryPage',
+                exec : 'Product/productsCtrl.index'
+            };
+        }
+    ]);
 
     return App;
 });

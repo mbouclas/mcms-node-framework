@@ -1,0 +1,14 @@
+<h3>Your cart</h3>
+<ul>
+    {% for item in Cart.items %}
+    <li>{{ item.qty }} x {{ item.title }}  &euro;{{ item.subTotal }}
+        <a href="{{ Route.resolve('removeFromCart',{productID : item.id }) }}">remove</a>
+    </li>
+    {% endfor %}
+</ul>
+<ul>
+    <li>Items total : &euro;{{ Cart.itemsTotal }}</li>
+    <li>Subtotal : &euro;{{ Cart.subTotal }}</li>
+</ul>
+
+<a href="{{ Route.resolve('clearCart') }}" class="btn btn-danger">Clear cart</a>

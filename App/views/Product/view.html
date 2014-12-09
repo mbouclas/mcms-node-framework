@@ -1,0 +1,34 @@
+{% extends '../layout.html' %}
+{% block content %}
+
+
+<h1>{{ product.title|safe }}</h1>
+        <h2>&euro;{{ product.eshop.price }}</h2>
+
+<img src="http://get-a-bag.com{{ product.thumb.thumb.imageUrl }}" title="{{ product.thumb.title }}" alt="{{ product.thumb.alt }}" />
+    <div>
+        {{ product.description|safe }}
+    </div>
+        <div>
+            {{ product.description_long|safe }}
+        </div>
+        <h2>Categories</h2>
+<ul>
+    {% for cat in product.categories %}
+    <li><a href="{{ Route.resolve('productCategory',{permalink : cat.permalink }) }}">
+        {{ cat.category }}</a></li>
+    {% endfor %}
+</ul>
+<h2>Efields</h2>
+<ul>
+    {% for field in product.ExtraFields %}
+    <li>{{ field.title }} {{ field.value }}</li>
+    {% endfor %}
+</ul>
+<h2>Images</h2>
+<ul>
+    {% for img in product.images %}
+    <li><img title="{{ img.title }}" alt="{{ img.alt }}" src="http://get-a-bag.com{{ img.thumb.imageUrl }}" /></li>
+    {% endfor %}
+</ul>
+{% endblock %}

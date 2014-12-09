@@ -1,0 +1,18 @@
+{% if Flash.addedToCart[0] == true %}
+    <div class="alert alert-success">Added to cart</div>
+{% endif %}
+<ul>
+    {% for item in items %}
+    <li><img src="http://get-a-bag.com{{ item.thumb.copies.thumb.imageUrl}}" /> <a href="{{ Route.resolve('product',{productID : item.autoID,permalink : item.permalink}) }}">
+        #{{item.autoID}} {{ item.title|safe }} &euro;{{ item.eshop.price }}</a>
+        <a href="{{ Route.resolve('addToCart',{productID : item.id}) }}" class="btn btn-primary">Add to cart</a>
+
+        <ul>
+            {% for cat in item.categories %}
+            <li><a href="{{ Route.resolve('productCategory',{permalink : cat.permalink }) }}">
+                {{ cat.category }}</a></li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ul>

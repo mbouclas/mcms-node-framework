@@ -1,0 +1,9 @@
+{% extends '../layout.html' %}
+{% block content %}
+<h1>{{ category.category }}</h1>
+<h2>({{count}}) Products</h2>
+
+{% include "./paginator.html" %}
+        
+{% include "../Product/productList.html" with {items : products} %}
+{% endblock %}

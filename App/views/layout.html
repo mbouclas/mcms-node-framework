@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="mcms">
+<head>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+<header>
+    <ul>
+        {% for item in Menu.header.items %}
+        <li><a href="{{item.href}}">{{ item.title }}</a></li>
+        {% endfor %}
+    </ul>
+</header>
+
+{% include "partials/navBar.html" with {foo : 'bar1'} %}
+## {{ Lang.get('user.Howdy') }}<br>
+## {{ Lang.get('messages.weekend',{name : 'Michael',surname : 'Bouclas'}) }}<br>
+## {{ Lang.choice('messages.cat',2,'boob') }}<br>
+
+{% include "partials/miniCartTop.html" %}
+
+
+<section class="wrapper wrapper-grey padding50">
+    <!-- start: WORKS CONTAINER -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    <!-- end: WORKS CONTAINER -->
+</section>
+
+
+
+
+</body>
+</html>

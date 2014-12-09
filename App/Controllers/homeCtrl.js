@@ -3,8 +3,10 @@ module.exports = (function(App,Package) {
         Auth,
         coreServices,
         Services,
-        async = require('async');
+        async = require('async'),
+        Loader = new App.EagerLoader();
     var Route;
+    var relationships ={};
 
     function homerCtrl(){
         this.name = 'homeCtrl';
@@ -13,7 +15,7 @@ module.exports = (function(App,Package) {
         eshopServices = App.serviceProviders.eshop.services;
         Services = Package.services;
 
-
+        relationships = App.serviceProviders.eshop.modelRelationships;
 
     }
 
@@ -26,8 +28,13 @@ module.exports = (function(App,Package) {
         var Products  = new eshopServices.Product();
         async.parallel({
             products : function(callback){//call a service instead
-
-                Products.getProducts({},callback);
+                Loader.set(Products).with([
+                    relationships.categories,
+                    relationships.eshop,
+                    relationships.thumb
+                ]).
+                    exec(Products.find.bind(null,{}),callback);
+                //Products.getProducts({},callback);
             }
         },function(err,results){
 

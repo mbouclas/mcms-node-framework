@@ -4,7 +4,7 @@ module.exports = (function(App){
     var slug = require('slug');
     var async = App.async;
     var Products,ExtraFields,Categories,EshopItemDetails,Users;
-    var idMap = {}, Product,Category,ExtraField,User,ItemDetail;
+    var idMap = {}, Product,Category,ExtraField,User,ItemDetail,Image;
 
     function command(){
         this.name = 'migrate';
@@ -17,6 +17,7 @@ module.exports = (function(App){
         Product = App.serviceProviders.eshop.models.Product;
         Category = App.serviceProviders.eshop.models.Category;
         ExtraField = App.serviceProviders.eshop.models.ExtraField;
+        Image = App.serviceProviders.eshop.models.ProductImage;
         User = App.serviceProviders.core.models.User;
 
         switch (this.module){
@@ -27,6 +28,8 @@ module.exports = (function(App){
             case 'categories' : migrateCategories(callback);
                 break;
             case 'users' : migrateUser(callback);
+                break;
+            case 'images' : migrateImages(callback);
                 break;
             default : migrateAll(callback);
                 break;
@@ -70,7 +73,10 @@ module.exports = (function(App){
         }
 
         for (var a in product.efields){
-            extraFields.push(idMap.ExtraField[product.efields[a].fieldid]);
+            extraFields.push({
+                fieldID : idMap.ExtraField[product.efields[a].fieldid],
+                value : product.efields[a].pivot.value
+            });
         }
 
 
@@ -216,6 +222,155 @@ module.exports = (function(App){
         });
     }
 
+    function insertImages(images,callback){
+
+        if (typeof images.length == 'undefined'){
+            callback(null,'done');
+            return;
+        }
+        var asyncArr = [],
+            len = images.length;
+
+        for (var i=0; len > i; i++){
+            asyncArr.push(addImage.bind(null,images[i]));
+        }
+
+
+        async.parallel(asyncArr,function(err,results){
+            callback(null,'product images done. ');
+        });
+    }
+
+    function addImage(image,callback){
+
+        if (typeof image.additional.length == 'undefined' || image.additional.length == 0){
+            return callback('no copies',null);
+        }
+
+        var oldImageMap = {
+            itemid : image.itemid,
+            imageID : image.id
+        };
+        var copies = {};
+
+        //first insert these images to their collection
+        var createdAt = (image.additional[0].created_at == null ) ? new Date : moment.unix(image.additional[0].date_added);
+        var updatedAt = createdAt;
+
+        for (var a in image.additional){
+            var copy = image.additional[a];
+            copies[copy.image_type] = {
+                imageUrl : copy.image_url,
+                imagePath : copy.image_path,
+                imageX : copy.image_x,
+                imageY : copy.image_y
+            }
+        }
+
+        var temp = {
+            originalFile: image.original_file,
+            created_at: createdAt,
+            updated_at: updatedAt,
+            settings: {},
+            copies : copies,
+            details : {},
+            oldID : image.id,
+            oldItemID : image.itemid
+        };
+
+        return new Image(temp,false).save(function(err,item){
+
+            if (err){
+                console.log('Image error : ',err);
+                return callback('Image error : ' + item.id);
+            }
+            createIdMap('Images',item.id,{
+                alt : image.alt,
+                title : image.title
+            });
+            //console.log(colors.magenta(item.originalFile) + ' inserted');
+            callback(null,'image added');
+        });
+
+    }
+
+    function updateProductImages(id,callback){
+
+        Image.find({oldItemID : id},function(err,images){
+            if (images.length == 0 || images == null){
+                return callback(null,'no images found for ' + id);
+            }
+
+            Product.findOne({oldID : id},function(err,doc){
+                if (typeof doc == 'undefined' || doc == null){
+                    return callback('not found');
+                }
+
+                var docImages = [],
+                    imagesLen = images.length;
+
+                for (var i = 0; imagesLen > i; i++){
+                    var obj = {id : images[i].id};
+                    if (typeof idMap.Images[images[i].id] != 'undefined'){
+                        obj.alt = idMap.Images[images[i].id].alt;
+                        obj.title = idMap.Images[images[i].id].title;
+                    }
+
+                    docImages.push(obj);
+                }
+
+                //doc.mediaFiles.images = docImages;
+                doc.set('mediaFiles.images',docImages);
+                //doc.thumb = {id : 'test'};
+
+
+                doc.save(function(err){
+                    if (err){
+                        console.log('ERRROR: :::',err);
+                    }
+                    callback(null,'product updated');
+                });
+
+            });
+        });
+    }
+
+    function updateProductThumb(itemID,imgID,callback){
+
+        Image.findOne({oldID : imgID},function(err,image){
+            if (image == null){
+                console.log(image)
+                return callback(null,'no images found for ' + imgID);
+            }
+
+            Product.findOne({oldID : itemID},function(err,doc){
+                if (typeof doc == 'undefined' || doc == null){
+                    return callback(null, 'not found');
+                }
+
+                var thumb = {
+                    id : image.id
+                };
+
+                if (typeof idMap.Images[image.id] != 'undefined'){
+                    thumb.alt = idMap.Images[image.id].alt;
+                    thumb.title = idMap.Images[image.id].title;
+                }
+
+                doc.set('thumb',thumb);
+
+
+                doc.save(function(err){
+                    if (err){
+                        console.log('ERRROR: :::',err);
+                    }
+                    callback(null,'product thumb updated');
+                });
+
+            });
+        });
+    }
+
     function migrateProducts(callback) {
         Products = readFile('Product');
         var asyncArr = [];
@@ -229,6 +384,48 @@ module.exports = (function(App){
         });
 
     }
+
+    function migrateImages(callback){
+        var Products = readFile('Product');
+        var Thumbs = readFile('Thumb');
+        var asyncArr = [],
+            updateProductImagesArr = [];
+
+        var thumbsLen = Thumbs.length,
+            thumbsObj = {};
+
+        for (var i=0;thumbsLen > i;i++){
+            if (Thumbs[i].thumb != null){
+                thumbsObj[Thumbs[i].thumb.itemid] = Thumbs[i].thumb;
+            }
+        }
+
+        for (var a in Products){
+            Products[a].thumb = thumbsObj[Products[a].id];
+
+            if (typeof Products[a].images != 'undefined'){
+                asyncArr.push(insertImages.bind(null,Products[a].images));
+                if (Products[a].thumb != 'undefined'){
+                    asyncArr.push(insertImages.bind(null,[Products[a].thumb]));
+                }
+
+                updateProductImagesArr.push(updateProductImages.bind(null,Products[a].id));
+                updateProductImagesArr.push(updateProductThumb.bind(null,Products[a].id,Products[a].thumb.id));
+            }
+        }
+
+        async.parallel(asyncArr,function(err,results) {
+            //lets update the products
+            async.parallel(updateProductImagesArr, function(err,updateResults){
+                if (err){
+                    console.log(err);
+                }
+                callback(null,'update products done');
+            });
+        });
+    }
+
+
 
     function migrateEshop(callback) {
         callback(null,true);
@@ -284,8 +481,8 @@ module.exports = (function(App){
             migrateUser,
             migrateCategories,
             migrateExtraField,
-            migrateProducts
-            //migrateImages
+            migrateProducts,
+            migrateImages
             //migrateDocuments
         ];
         async.series(asyncArr,function(err,results){

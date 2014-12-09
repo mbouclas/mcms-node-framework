@@ -1,0 +1,24 @@
+{{page}}--
+<nav>
+    <ul class="pagination">
+        {% if pagination.page == 1 %}
+        <li class="disabled"><span aria-hidden="true">&laquo;</span></li>
+        {% else %}
+        <li><a href="{{ Route.resolve('productCategoryPage',{permalink : category.permalink,page:pagination.prev}) }}">&laquo;</a></li>
+        {% endif %}
+
+        {% for page in pagination.pages %}
+        {% if page == pagination.page %}
+        <li class="active"><span>{{ page }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+        <li><a href="{{ Route.resolve('productCategoryPage',{permalink : category.permalink,page:page}) }}">{{ page }}</a></li>
+        {% endif %}
+        {% endfor %}
+
+        {% if pagination.page == pagination.total %}
+        <li class="disabled"><span aria-hidden="true">&raquo;</span></li>
+        {% else %}
+        <li><a href="{{ Route.resolve('productCategoryPage',{permalink : category.permalink,page:pagination.next}) }}">&raquo;</a></li>
+        {% endif %}
+    </ul>
+</nav>
