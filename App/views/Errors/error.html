@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title></title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+<style>
+    body.error-full-page {
+        background: #ffffff none repeat scroll 0 0 !important;
+    }
+    body.error-full-page .page-error {
+        margin-top: 60px;
+    }
+    .page-error {
+        text-align: center;
+    }
+    .page-error .error-number {
+        display: block;
+        font-size: 158px;
+        font-weight: 300;
+        letter-spacing: -10px;
+        line-height: 128px;
+        margin-top: 0;
+        text-align: center;
+    }
+    .page-error .error-details {
+        display: block;
+        padding-top: 0;
+        text-align: center;
+    }
+    .page-error .error-details .btn-return {
+        margin: 10px 0;
+    }
+    .page-error .error-details h3 {
+        margin-top: 0;
+    }
+    body.error-full-page {
+        overflow: hidden;
+    }
+    .error-full-page img {
+        display: none;
+    }
+    .error-full-page #canvas {
+        left: 0;
+        position: absolute;
+        top: 0;
+    }
+    .page-error .error-number {
+        display: block;
+        font-size: 158px;
+        font-weight: 300;
+        letter-spacing: -10px;
+        line-height: 128px;
+        margin-top: 0;
+        text-align: center;
+    }
+    .bricky {
+        color: #c83a2a;
+    }
+    .teal {
+        color: #569099;
+    }
+</style>
+</head>
+<body>
+<div class="row">
+    {% block content %}{% endblock %}
+
+</div>
+
+</body>
+</html>
+

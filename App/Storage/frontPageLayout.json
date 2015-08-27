@@ -1,0 +1,66 @@
+
+[
+  {
+    "type" : "slider",
+    "items" : [
+      {
+        "type" : "image",
+        "src" : "https://cdn.rnd.com.tr/eastpak/Content/img/anasayfa/slider/tranverz-banner.jpg",
+        "href" : "/product/123",
+        "col" : 12
+      },
+      {
+        "type" : "image",
+        "src" : "https://cdn.rnd.com.tr/eastpak/Content/img/anasayfa/slider/morvaliz.jpg",
+        "href" : "/product/123",
+        "col" : 12
+      },
+      {
+        "type" : "image",
+        "src" : "https://cdn.rnd.com.tr/eastpak/Content/img/anasayfa/slider/merge-slider.jpg",
+        "href" : "/product/123",
+        "col" : 12
+      }
+    ]
+  },
+  {
+    "type" : "row",
+    "items" : [
+      {
+        "type" : "image",
+        "src" : "http://cdn.rnd.com.tr/eastpak/Content/img/banner/anasayfa11.jpg",
+        "href" : "/product/123",
+        "col" : "4"
+      },
+      {
+        "type" : "image",
+        "src" : "http://cdn.rnd.com.tr/eastpak/Content/img/banner/anasayfa-222.jpg",
+        "href" : "/product/123",
+        "col" : "4"
+      },
+      {
+        "type" : "image",
+        "src" : "http://cdn.rnd.com.tr/eastpak/Content/img/banner/anasayfa3.jpg",
+        "href" : "/product/123",
+        "col" : "4"
+      }
+    ]
+  },
+  {
+    "type" : "row",
+    "items" : [
+      {
+        "type" : "image",
+        "src" : "https://cdn.rnd.com.tr/eastpak/Content/img/anasayfa/subcontent/kirmizisirt.jpg",
+        "href" : "/product/123",
+        "col" : "6"
+      },
+      {
+        "type" : "image",
+        "src" : "https://cdn.rnd.com.tr/eastpak/Content/img/anasayfa/subcontent/eastpak-outlet-banner.jpg",
+        "href" : "/product/123",
+        "col" : "6"
+      }
+    ]
+  }
+]

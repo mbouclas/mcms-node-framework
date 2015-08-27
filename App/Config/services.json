@@ -1,3 +1,18 @@
 {
+  "mandrill" : {
 
+  },
+  "mailchimp" : {
+    "key" : "",
+    "defaultListId" : "",
+    "double_optin" : false
+  },
+  "maxmind" : {
+    "path" : "./MaxMind",
+    "files" : {
+      "city" : "GeoLiteCity.dat",
+      "country" : "GeoIP.dat",
+      "asn" : "GeoIPASNum.dat"
+    }
+  }
 }

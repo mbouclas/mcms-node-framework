@@ -1,0 +1,144 @@
+<html>
+<head>
+    <title>{% block pageTitle %}Eastpak.com.cy{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+
+        /* ===== TYPOGRAPHY ====== */
+        body {
+            font-family: Georgia;
+            font-size: 12px;
+            line-height: 21px;
+            color: #1a1a1a;
+        }
+        a {
+            color: #4c4c4c;
+            border-bottom: 1px solid #ccc;
+        }
+        a:focus {
+            outline: none;
+            text-decoration: none;
+        }
+        footer a {
+            border-color: #4c4c4c;
+        }
+        a,
+        .btn-link,
+        a > *,
+        .btn-link > * {
+            -webkit-transition: color .2s ease;
+            transition: color .2s ease;
+        }
+        a:hover,
+        .btn-link:hover,
+        a > *:hover,
+        .btn-link > *:hover {
+            color: #E03E41;
+            text-decoration: none;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'PT Sans', sans-serif;
+            line-height: 1.2em;
+            margin: 0;
+            font-weight: bold;
+        }
+        h1,
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-left: -1px;
+            margin-bottom: 19px;
+        }
+        h3 {
+            font-size: 20px;
+            margin: 20px 0 10px -1px;
+        }
+        h4 {
+            font-size: 16px;
+            margin: 20px 0 10px 0;
+        }
+        h5,
+        h6 {
+            font-weight: normal;
+            font-size: 14px;
+            margin: 20px 0 10px 0;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        p:last-child {
+            margin-bottom: 0;
+        }
+        ul {
+            padding: 0 0 0 17px;
+        }
+        ul li + li {
+            margin-top: 10px;
+        }
+        hr {
+            border-top: 1px solid #e5e5e5;
+        }
+        /* ==== STRONG HEADER ==== */
+        .strong-header {
+
+            font-weight: bold;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+        h1.strong-header {
+            font-size: 18px;
+        }
+        h2.strong-header {
+            font-size: 16px;
+        }
+        h3.strong-header {
+            font-size: 16px;
+        }
+        h4.strong-header {
+            font-size: 14px;
+        }
+        h5.strong-header {
+            font-size: 14px;
+        }
+        h6.strong-header {
+            font-size: 14px;
+        }
+        h1.large-header,
+        h2.large-header,
+        h3.large-header,
+        h4.large-header,
+        h5.large-header,
+        h6.large-header {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body bgcolor="#FFFFFF">
+<table align="center" width="600" cellspacing="0" cellpadding="5">
+    <tr>
+
+        <td bgcolor="#e03e41">
+
+            <a href="{{Config.app.url}}"><img src="{{Config.app.siteName}}/images/site/logo.png" /></a>
+        </td>
+        <td style="color: white;" bgcolor="#e03e41" align="center"><h1 style="margin-top: 15px">{{Config.app.siteName}}</h1></td>
+
+    </tr>
+</table>
+
+<table width="600" align="center">
+    <tr>
+        <td style="padding-top: 30px;">
+            {% block content %}{% endblock %}
+        </td>
+    </tr>
+</table>
+
+
+</body>
+

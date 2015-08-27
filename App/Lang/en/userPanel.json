@@ -1,0 +1,24 @@
+{
+  "statusCodes" : {
+    "orderStarted": "Order started",
+    "OrderWaitingConfirmation": "Order is waiting confirmation",
+    "orderConfirmed": "Order confirmed",
+    "orderProcessed": "Order processed",
+    "orderSent": "Order dispatched",
+    "orderComplete": "Order complete",
+    "orderCanceled": "Order canceled"
+  },
+  "newsLetter" : {
+    "List_AlreadySubscribed" : "You have already subscribed to our newsletter"
+  },
+  "user" : {
+    "registrationSuccess" : "Registration successful. Please check your email to confirm your account",
+    "forgotPassword" : "We have sent you instructions to reset your password.",
+    "activationSuccess" : "Your account is now active. Please use the form bellow to login",
+    "activationFail" : "This is not a valid activation link."
+  },
+  "login" : {
+    "notAllowed" : "Invalid username or password",
+    "invalid-username-or-password" : "Invalid username or password"
+  }
+}

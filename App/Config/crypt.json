@@ -10,5 +10,10 @@
     "secret" : "YourSecretKey!!!",
     "driver" : "bcrypt",
     "salt" : 10
+  },
+  "crypto" : {
+    "secret" : "myBigAssSecretKe",
+    "driver" : "mcms-crypto",
+    "algorithm" : "aes-256-ecb"
   }
 }

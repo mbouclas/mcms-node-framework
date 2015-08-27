@@ -1,0 +1,14 @@
+{% extends "../customer.layout.html" %}
+
+{% block content %}
+<p>Hello {{ User.firstName }} {{ User.lastName }},</p>
+
+<p>Welcome to {{Config.app.siteName}}! Please click on the following link to confirm your
+    <strong>{{Config.app.siteName}}</strong> account:</p>
+
+<p><a href="{{Config.app.url}}/user/activate/{{ User.activation_code }}">{{Config.app.url}}/user/activate/{{ User.activation_code }}</a></p>
+
+<p>Best regards,</p>
+
+<p>{{Config.app.siteName}} Team</p>
+{% endblock %}

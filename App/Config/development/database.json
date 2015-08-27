@@ -1,0 +1,30 @@
+{
+  "mysql" : {
+    "driver" : "mcms-mysql",
+    "host" : "localhost",
+    "database" : "",
+    "username" : "root",
+    "password" : "",
+    "multipleStatements": true,
+    "options" : {
+      "logging" : false
+    }
+  },
+  "mongodb" : {
+    "driver" : "mcms-mongodb",
+    "host" : "localhost",
+    "database" : "",
+    "user": "",
+    "password": "",
+    "port" : "27017",
+    "autoLoadModels" : true,
+    "debug" : false
+  },
+  "redis" : {
+    "driver" : "mcms-redis",
+    "host" : "localhost",
+    "port" : 6379,
+    "database" : 0,
+    "password" : ""
+  }
+}

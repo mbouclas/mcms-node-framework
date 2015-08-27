@@ -1,39 +1,70 @@
 <!DOCTYPE html>
 <html ng-app="mcms">
-<head>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-</head>
-<body>
-<header>
-    <ul>
-        {% for item in Menu.header.items %}
-        <li><a href="{{item.href}}">{{ item.title }}</a></li>
-        {% endfor %}
-    </ul>
-</header>
+  <head>
+    <title>{% block pageTitle %}Eastpak.com.cy{% endblock %}</title>
 
-{% include "partials/navBar.html" with {foo : 'bar1'} %}
-## {{ Lang.get('user.Howdy') }}<br>
-## {{ Lang.get('messages.weekend',{name : 'Michael',surname : 'Bouclas'}) }}<br>
-## {{ Lang.choice('messages.cat',2,'boob') }}<br>
-
-{% include "partials/miniCartTop.html" %}
+    <link rel="stylesheet" href="/assets/build/styles/styles-6f5b953750.css">
 
 
-<section class="wrapper wrapper-grey padding50">
-    <!-- start: WORKS CONTAINER -->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                {% block content %}{% endblock %}
-            </div>
-        </div>
-    </div>
-    <!-- end: WORKS CONTAINER -->
-</section>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<!--    <link rel="apple-touch-icon" href="/images/site/apple-touch-icon-57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/site/apple-touch-icon-72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/site/apple-touch-icon-114.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/site/apple-touch-icon-144.png" />-->
+    <script>
+      var CSRF = '{{CSRF}}',
+              Cart = '{{ Cart|safe|json }}',
+              User = '{{ User|safe|json }}';
+      Shipping = '{{ shipping|safe }}';
+      Payment = '{{ payments|safe }}';
+      statusCodes = '{{ statusCodes|safe }}';
+      Translations = '{{ Translations|json|safe }}';
+
+    </script>
+  </head>
+  <body ng-controller="mainCtrl as Main">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-66472319-1', 'auto');
+    if (User && User.email){
+      ga('set', '&uid', User.email); // Set the user ID using signed-in user_id.
+    }
+
+    ga('send', 'pageview');
+
+  </script>
+  <span loading id="loading"><img src="/images/ajax-loader.gif" class="ajax-loader"></span>
+
+  {% include "partials/header.html" %}
+  {% include "partials/navBar.html" %}
+
+  <div class="container separator-top">
+  <div id="mainContent">
+    {% block content %}{% endblock %}
+
+    {% include "partials/footer.html" %}
+  </div>
+  </div>
 
 
+  <script src="/assets/build/js/scripts-a9ecc32997.js"></script>
 
+  <script>
+    $( window ).load(function() {
+      $(document).on('click', '.navbar .dropdown-menu', function(e) {e.stopPropagation();})
+    });
+    (function () {
+      if ($(document).width() > 580){
+        $("#mainImage").elevateZoom({ zoomType	: "inner", cursor: "crosshair",gallery:'imagesGallery',
+            imageCrossfade : true, loadingIcon:'/images/ajax-loader.gif' });
+      }
 
-</body>
+    })();
+  </script>
+  </body>
 </html>

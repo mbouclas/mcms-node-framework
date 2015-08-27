@@ -1,0 +1,29 @@
+{% extends "../customer.layout.html" %}
+{% block content %}
+
+
+<p>
+Dear, {{Order.orderInfo.firstName}} {{Order.orderInfo.lastName}}
+</p>
+
+<p>
+We have sent you the order.
+</p>
+{% if Order.orderDetails.trackingNumber %}
+<p>
+We would like to inform you that the tracking number for your Order
+
+Is <strong>{{Order.orderDetails.trackingNumber}}</strong> and you can track it via the website
+    <a href="http://www.track-trace.com/post" target="_blank">http://www.track-trace.com/post/</a>
+</p>
+{% endif %}
+<p>
+We remain at your service for anything you may need,
+
+
+
+With Regards,
+    <br>
+{{Config.App.siteName}} sales team
+</p>
+{% endblock %}

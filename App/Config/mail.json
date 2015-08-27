@@ -1,3 +1,12 @@
 {
-
+  "admin" : {
+    "name" : "My Site",
+    "email" : "info@mymai.com"
+  },
+  "default" : "mandrill",
+  "mandrill" : {
+    "driver" : "mcms-mandrill",
+    "key" : "",
+    "options" : {}
+  }
 }

@@ -1,0 +1,119 @@
+#!/usr/bin/env node
+
+var OS = require("os");
+var fs = require('fs');
+var path = require('path');
+var environments = require('../environments');
+var configLoader = require("mcms-node-config-loader").setEnv(environments);
+var Config = configLoader.loadConfig(path.join(__dirname,'../App/Config'));
+Config.baseDir = path.join(__dirname,'../');
+Config.env = configLoader.detectedEnv;
+Config.environments = environments;
+var events = require('events');
+var Event = new events.EventEmitter();
+/**
+ * Module dependencies.
+ */
+require('pmx').init();
+
+var app = require('../app')(Config,Event);
+var debug = require('debug')('mml-ui:server');
+var http = require('http');
+var https = require('https');
+http.globalAgent.maxSockets = 400;
+https.globalAgent.maxSockets = 400;
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(Config.app.serverPort || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+var ip = Config.app.serverIp || '0.0.0.0';
+if (Config.app.useHTTPS){
+  var HttpsOptions = {
+    key: fs.readFileSync(Config.baseDir + Config.app.certificates.key,'utf8'),
+    cert: fs.readFileSync(Config.baseDir + Config.app.certificates.web,'utf8')
+  };
+  var secureServer = https.createServer(HttpsOptions, app).listen(normalizePort(Config.app.securePort),ip);
+  secureServer.on('error', function(err){
+    console.log(err);
+  });
+  secureServer.on('listening', function(){
+    console.log('Https listening on ' + Config.app.securePort);
+  });
+}
+
+
+var server = http.createServer(app);
+server.listen(port,ip);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+function onListening() {
+  Event.emit("app.started");
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  console.log('Listening on ' + bind);
+}

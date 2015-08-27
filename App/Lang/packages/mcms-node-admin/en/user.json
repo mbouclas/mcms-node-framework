@@ -1,0 +1,6 @@
+{
+  "auth": {
+	"userNotAdmin": "You are not an admin",
+	"invalid-username-or-password" : "Invalid username or password"
+  }
+}

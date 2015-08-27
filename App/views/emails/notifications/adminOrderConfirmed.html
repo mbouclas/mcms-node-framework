@@ -1,0 +1,9 @@
+{% extends "../admin.layout.html" %}
+{% block content %}
+
+New order {{Order.orderId}} Confirmed
+
+{% include "emails/notifications/orderDetails.html" %}
+
+
+{% endblock %}

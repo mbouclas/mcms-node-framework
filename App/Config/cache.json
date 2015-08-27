@@ -1,1 +1,14 @@
-{}
+{
+  "default" : "redis",
+  "prefix" : "eas:",
+  "ttl" : 0,
+  "redis" : {
+    "driver" : "mcms-redis",
+    "host" : "localhost",
+    "port" : 6379,
+    "database" : 0,
+    "password" : ""
+  },
+  "memory" : {},
+  "memcached" : {}
+}

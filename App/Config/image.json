@@ -1,0 +1,33 @@
+{
+  "pages" : {
+    "dir" : "./public/media_files/images/page_:permalink/",
+    "keepOriginals" : true,
+    "copies" :
+      {
+        "thumb" : {
+          "width" : 70,
+          "height" : 90,
+          "quality" : 1,
+          "prefix" : "t_",
+          "resizeType" : "imageBox",
+          "dir" : "thumbs/"
+        },
+        "big_thumb" : {
+          "width" : 340,
+          "height" : 433,
+          "quality" : 1,
+          "prefix" : "t1_",
+          "resizeType" : "imageBox",
+          "dir" : "big_thumbs/"
+        },
+        "main" : {
+          "width" : 450,
+          "height" : 574,
+          "quality" : 1,
+          "prefix" : "main_",
+          "resizeType" : "imageBox/",
+          "dir" : ""
+        }
+      }
+  }
+}

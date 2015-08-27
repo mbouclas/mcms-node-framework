@@ -1,0 +1,32 @@
+[
+    {
+        "module" : "mcmsNodeEshop",
+        "alias" : "E-Shop",
+        "items" : {
+            "Product": {
+                "model": "Product", "type": "Product", "titleField" : "title","alias" : "Products", "permalinkPattern" : "product/:permalink"
+            },
+            "ProductCategory": {
+                "model": "ProductCategory", "type": "ProductCategory", "titleField" : "category", "alias" : "Product categories","permalinkPattern" : "product-category/:permalink"
+            },
+            "Discount": {
+                "model": "Discount", "type": "Discount", "titleField" : "title", "alias" : "Discounts","permalinkPattern" : "discount/:permalink"
+            },
+            "Coupon" : {
+                "model": "Coupon", "type": "Coupon", "titleField" : "title", "alias" : "Coupons","permalinkPattern" : "coupon/:permalink"
+            }
+        }
+    },
+    {
+        "module" : "mcmsNodePages",
+        "alias" : "Content",
+        "items" : {
+            "Page": {
+                "model": "Page", "type": "Page", "titleField" : "title","alias" : "Pages","permalinkPattern" : "page/${permalink}"
+            },
+            "PageCategory": {
+                "model": "PageCategory", "type": "PageCategory", "titleField" : "category", "alias" : "Page categories","permalinkPattern" : "page-category/${permalink}"
+            }
+        }
+    }
+]

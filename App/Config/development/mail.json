@@ -1,0 +1,12 @@
+{
+  "admin" : {
+    "name" : "My company name",
+    "email" : ""
+  },
+  "default" : "mandrill",
+  "mandrill" : {
+    "driver" : "mcms-mandrill",
+    "key" : "",
+    "options" : {}
+  }
+}

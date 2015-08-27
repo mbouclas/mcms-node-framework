@@ -1,0 +1,16 @@
+{% extends "../layout.html" %}
+{% block pageTitle %}{{ User.email }} control panel{% endblock %}
+{% block content %}
+<div ng-controller="userCtrl as VM">
+
+{% if activationMessage.length > 0 %}
+    <div class="alert alert-success">
+        Your account is now active. <br>
+        You may login with the username/password you entered during the registration process.
+    </div>
+{% endif %}
+<user-cp></user-cp>
+
+
+</div>
+{% endblock %}

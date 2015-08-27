@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% import "macros/frontPageLayouts.html" as Layout %}
+{% block content %}
+
+<div class="container">
+    {% for row in layout %}
+    {{Layout[row.type](row.items)|safe}}
+    {% endfor %}
+
+
+    <div class="well well-lg">
+        <img src="http://www.eastpak.com/media//904x190_HP_footer_UK_EN-3.jpg" class="img-responsive">
+    </div>
+
+    <div class="newsletter-box row text-center well">
+        <div class="successMessage alert alert-success alert-dismissable" ng-show="Main.subscriptionSuccess">
+            Thank You! You have subscribed to our mailing list.
+        </div>
+        <div class="errorMessage alert alert-danger alert-dismissable" ng-show="Main.subscriptionError  " ng-bind="Main.subscriptionError">
+        </div>
+
+        <form role="form"  method="post" class="form"
+              ng-submit="Main.subscribeToNewsLetter('footerQuickSignUp')">
+            <h3 class="strong-header">Sign up to get the latest offers </h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="sr-only" for="newsletter-widget-name-1">Your name</label>
+                        <input type="text" name="field[]" class="form-control"
+                               id="newsletter-widget-name-1" placeholder="Your name" ng-model="Main.newsLetter.name" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="sr-only" for="newsletter-widget-email-1">Your email</label>
+                        <input type="email" name="emailSmall" class="form-control"
+                               ng-model="Main.newsLetter.email" id="newsletter-widget-email-1" placeholder="Your email" required>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success btn-block btn-lg">Sign up</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

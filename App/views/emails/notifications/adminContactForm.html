@@ -1,0 +1,13 @@
+{% extends "../admin.layout.html" %}
+{% block content %}
+
+<h1>Message data</h1>
+<ul>
+    {% for key,val in Data.Message %}
+    <li>
+        <strong>{{key}}</strong> : {{val}}
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,3 +1,13 @@
 {
+  "url" : "mcms.example.com",
+  "serverIp": "0.0.0.0",
+  "serverPort" : 8003,
+  "securePort" : 8043,
+  "certificates" : {
+    "key" : "certs/key.pem",
+    "web" : "certs/cert.pem"
+  },
+  "sessionTTL" : "1d",
+  "maintenance" : false,
   "debug" : true
 }

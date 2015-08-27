@@ -1,0 +1,21 @@
+{% extends "../customer.layout.html" %}
+{% block content %}
+<p>Hello {{Order.user.firstName}} {{Order.user.lastName}}</p>
+<p>Your order number is: <strong><a href="{{Config.app.url}}/userCP#?action=myOrders&orderID={{Order.orderId}}">{{Order.orderId}}</a></strong></p>
+<p>All items are shipped on the next business day after the order is placed. An order
+
+    tracking information message will be sent to you as soon as the item is shipped.</p>
+
+{% include "emails/notifications/orderDetails.html" %}
+
+            <div style="margin-top: 40px;">
+                We hope you will be satisfied with your purchase and looking forward to seeing you
+
+                again on our e-shop!
+
+                Thank you,
+            </div>
+
+
+
+{% endblock %}

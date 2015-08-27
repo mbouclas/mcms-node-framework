@@ -1,0 +1,77 @@
+<table width="95%" align="center" style="margin-top: 40px;">
+    <tr>
+        <td>
+
+            <table width=100% border="0" cellspacing="0" cellpadding="1">
+                <tr>
+                    <td><b>Order ID: </b> {{Order.orderId}}</td>
+                    <td align=right>&nbsp;&nbsp;&nbsp;</td>
+                </tr>
+                <tr><td colspan="2"><b>Date:</b> {{moment(Order.created_at).format('DD/MM/YYYY @ HH:mm:ss')}}</td></tr>
+
+
+
+
+                <tr><td colspan="2">&nbsp;</td></tr>
+
+                <tr>
+                    <td width=50%><b>Invoice to:</b><br>{{Order.orderInfo.lastName}} {{Order.orderInfo.firstName}}</td>
+                    <td width=50%>&nbsp;</td>
+                </tr>
+                <tr><td>{{Order.orderInfo.street}} {{Order.orderInfo.streetNo}}</td><td>&nbsp;</td></tr>
+                <tr><td>
+                    {% if Order.orderInfo.district %}
+                    {{Order.orderInfo.district}}
+                    {% endif %}
+                    {{Order.orderInfo.city}} {{Order.orderInfo.postCode}}</td><td>&nbsp;</td></tr>
+                <tr><td>{{Order.orderInfo.phone}}</td><td>&nbsp;</td></tr>
+                {% if Order.orderInfo.mobile %}
+                <tr><td>{{Order.orderInfo.mobile}}</td><td>&nbsp;</td></tr>
+                {% endif %}
+            </table>
+            {{Order.notes}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+
+            <table width=100% border=0 cellpadding=5 cellspacing=5>
+                <tr>
+                    <td width=12% align=center bgcolor="#e03e41" style="color: white;"><b>Quantity</b></td>
+                    <td width=12% align=center bgcolor="#e03e41" style="color: white;"><b>SKU</b></td>
+                    <td width=56% bgcolor="#e03e41" style="color: white;" align="center"><b>Product</b></td>
+                    <td width=16% bgcolor="#e03e41" style="color: white;" align="center"><b>Price</b></td>
+                    <td width=16%  bgcolor="#e03e41" style="color: white;" align="center"><b>Amount</b></td>
+                </tr>
+                {% for item in Order.items %}
+                <tr>
+                    <td width=12% align=center ><b>{{item.qty}}</b></td>
+                    <td width=12% align=center ><b>{{item.sku}}</b></td>
+                    <td width=56%  align="left"><b>{{item.title}}</b></td>
+                    <td width=16%  align="center" ><b>&euro;{{item.price}}</b></td>
+                    <td width=16%  align="center" ><b>&euro;{{item.finalPrice}}</b></td>
+                </tr>
+                {% endfor %}
+                <tr><td colspan="4"><hr size=1></td></tr>
+
+                {% if Order.orderDetails.couponUsed %}
+                <tr>
+                    <td colspan=2></td>
+                    <td align=left><b>{{Order.orderDetails.couponUsed.title}}</b></td>
+                </tr>
+                {% endif %}
+                <tr><td colspan=4><hr size=1></td></tr>
+
+                <tr>
+                    <td colspan=2></td>
+                    <td align=left><b>TOTAL</b></td>
+                    <td align=right>&euro;{{Order.amount}}</td>
+                </tr>
+
+            </table>
+
+
+
+        </td>
+    </tr>
+</table>

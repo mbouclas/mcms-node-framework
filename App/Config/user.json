@@ -1,0 +1,11 @@
+{
+  "createRules" : {
+    "firstName" : "isAlpha",
+    "lastName" : "isAlpha",
+    "email" : "isEmail",
+    "password" : "notNull"
+  },
+  "updateRules" : {
+    "password" : "notNull"
+  }
+}

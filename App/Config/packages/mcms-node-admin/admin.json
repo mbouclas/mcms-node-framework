@@ -1,0 +1,5 @@
+{
+  "name" : "admin",
+  "theme" : "mcms-node-admin-ui",
+  "adminClasses" : ["A","SU","SA"]
+}

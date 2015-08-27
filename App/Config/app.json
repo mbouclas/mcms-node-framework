@@ -1,15 +1,33 @@
 {
-  "serverPort" : 8003,
+  "serverPort" : 8086,
+  "securePort" : 8087,
+  "serverIp": "127.0.0.1",
+  "useHTTPS"  : true,
   "debug" : false,
   "locale" : "en",
   "locales" : ["en"],
-  "url" : "http://mcms.example.com",
-  "siteName" : "Mcms-node",
+  "publicDir" : "./public/",
+  "localesDir" : "App/Lang",
+  "url" : "eastpak.com.cy",
+  "siteName" : "Your site name",
+  "privateKey" : "Your Private Key",
+  "maintenance" : true,
+  "author" : {
+    "name" : "Michael Bouclas",
+    "email" : "mbouclas@gmail.com",
+    "url" : "http://www.net-tomorrow.com"
+  },
+  "uploads" : {
+    "dest" : "./uploads"
+  },
+  "certificates" : {
+    "key" : "certs/private-key.pem",
+    "ca" : "certs/intermediate-ca.pem",
+    "web" : "certs/web-server.pem"
+  },
   "sessionTTL" : "1h",
   "serviceProviders" : [
     "mcms-node-core/lib/CoreServiceProvider",
-    "mcms-node-admin/AdminServiceProvider",
-    "mcms-node-eshop/EshopServiceProvider",
     "./App/projectServiceProvider"
   ]
 }

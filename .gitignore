@@ -1,5 +1,4 @@
 # Logs
-logs
 *.log
 
 # Runtime data
@@ -27,3 +26,7 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 /.idea
+
+atlassian-ide-plugin.xml
+workbench
+/uploads/*

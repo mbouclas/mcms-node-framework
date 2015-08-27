@@ -1,0 +1,30 @@
+{% extends "../layout.html" %}
+{% block pageTitle %}Sign up{% endblock %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-4">
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h2 class="panel-title">Already have an account?</h2></div>
+                    <div class="panel-body">
+                        <a href="{{ Route.url('Login') }}" class="btn btn-default btn-block btn-lg">
+                            Login with {{ Config.app.siteName }}
+                        </a>
+                        <div class="separator"></div>
+                        {% include "../partials/socialLoginButtons.html" %}
+                    </div>
+                </div>
+        </div><!-- END LEFT -->
+        <div class="col-md-8">
+
+                    <div class="panel panel-primary">
+                <div class="panel-heading"><h2 class="panel-title">Create an account</h2></div>
+                <div class="panel-body">
+                    <sign-up-user></sign-up-user>
+                </div>
+                </div>
+        </div>
+    </div><!-- END ROW -->
+
+{% endblock %}

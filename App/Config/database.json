@@ -2,27 +2,35 @@
   "default" : "mongodb",
   "mysql" : {
     "driver" : "mcms-mysql",
-    "host": "localhost",
-    "user": "root",
-    "password": "magicj",
-    "database": "louiscruise",
+    "host" : "localhost",
+    "database" : "",
+    "username" : "",
+    "password" : "",
     "multipleStatements": true,
     "socketPath" : "/var/run/mysqld/mysqld.sock"
   },
   "redis" : {
     "driver" : "mcms-redis",
-    "host" : "ubuntu",
+    "host" : "localhost",
     "port" : 6379,
-    "database" : 0
+    "database" : 0,
+    "password" : ""
   },
   "mongodb" : {
     "driver" : "mcms-mongodb",
-    "host": "ubuntu",
-    "user": "root",
-    "password": "secret",
-    "database": "tv"
+    "host" : "localhost",
+    "database" : "",
+    "user": "",
+    "password": "",
+    "port" : "27017",
+    "autoLoadModels" : true,
+    "debug" : false
   },
   "elasticSearch" : {
-
+    "driver" : "mcms-elasticSearch",
+    "host" : "localhost:9200",
+    "indexes" : {
+      "products" : "products"
+    }
   }
 }
