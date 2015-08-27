@@ -10,11 +10,6 @@ module.exports = (function (App, Route, Package) {
 
   Route.set(names, 'userCP');
 
-
-  router.get('/', [App.Auth.middleware.authenticate], Controllers['User/UserCP'].index);
-
-
-
   return router;
 
 });
